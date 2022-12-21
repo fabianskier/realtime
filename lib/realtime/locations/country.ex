@@ -2,6 +2,8 @@ defmodule Realtime.Locations.Country do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @moduledoc false
+
   schema "countries" do
     field :abbreviation, :string
     field :name, :string
