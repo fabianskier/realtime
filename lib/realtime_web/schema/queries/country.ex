@@ -4,6 +4,7 @@ defmodule RealtimeWeb.Schema.Queries.Country do
   alias RealtimeWeb.Resolvers
 
   object :country_queries do
+    @desc "Get a country by its id"
     field :country, :country do
       arg :id, non_null(:id)
 

@@ -6,4 +6,8 @@ defmodule RealtimeWeb.Resolvers.Country do
 
     Country.find(%{id: id})
   end
+
+  def create_country(args, _) do
+    Country.create_country(args)
+  end
 end
