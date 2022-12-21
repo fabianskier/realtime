@@ -5,8 +5,17 @@ defmodule RealtimeWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", RealtimeWeb do
+  scope "/api" do
     pipe_through :api
+
+    forward "/graphql", Absinthe.Plug,
+    schema: RealtimeWeb.Schema
+
+  if Mix.env() === :dev do
+    forward "/graphiql", Absinthe.Plug.GraphiQL,
+      schema: RealtimeWeb.Schema,
+      interface: :playground
+  end
   end
 
   # Enables LiveDashboard only for development
