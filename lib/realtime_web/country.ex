@@ -1,5 +1,6 @@
 defmodule RealtimeWeb.Country do
   alias Realtime.Locations
+  alias RealtimeWeb.Schema.ChangesetErrors
 
   def find(%{id: id}) do
     try do
@@ -7,6 +8,17 @@ defmodule RealtimeWeb.Country do
     rescue
       Ecto.NoResultsError ->
         {:error, %{message: "country not found", details: %{id: id}}}
+    end
+  end
+
+  def create_country(args) do
+    case Locations.create_country(args) do
+      {:error, changeset} ->
+        {:error,
+         message: "Could not create country", details: ChangesetErrors.error_details(changeset)}
+
+      {:ok, country} ->
+        {:ok, country}
     end
   end
 end
