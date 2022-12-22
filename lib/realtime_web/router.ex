@@ -14,6 +14,7 @@ defmodule RealtimeWeb.Router do
   if Mix.env() === :dev do
     forward "/graphiql", Absinthe.Plug.GraphiQL,
       schema: RealtimeWeb.Schema,
+      socket: RealtimeWeb.UserSocket,
       interface: :playground
   end
   end
