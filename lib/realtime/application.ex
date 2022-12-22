@@ -15,7 +15,8 @@ defmodule Realtime.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Realtime.PubSub},
       # Start the Endpoint (http/https)
-      RealtimeWeb.Endpoint
+      RealtimeWeb.Endpoint,
+      {Absinthe.Subscription, RealtimeWeb.Endpoint}
       # Start a worker by calling: Realtime.Worker.start_link(arg)
       # {Realtime.Worker, arg}
     ]

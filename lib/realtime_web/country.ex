@@ -18,7 +18,16 @@ defmodule RealtimeWeb.Country do
          message: "Could not create country", details: ChangesetErrors.error_details(changeset)}
 
       {:ok, country} ->
+        publish_country_change(country)
         {:ok, country}
     end
+  end
+
+  defp publish_country_change(country) do
+    Absinthe.Subscription.publish(
+      RealtimeWeb.Endpoint,
+      country,
+      country_change: country.id
+    )
   end
 end

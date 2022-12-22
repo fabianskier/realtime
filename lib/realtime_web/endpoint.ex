@@ -1,5 +1,10 @@
 defmodule RealtimeWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :realtime
+  use Absinthe.Phoenix.Endpoint
+
+  socket "/socket", RealtimeWeb.UserSocket,
+      websocket: true,
+      longpoll: false
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
