@@ -23,6 +23,21 @@ defmodule RealtimeWeb.Country do
     end
   end
 
+  def update_country(args) do
+    country = Locations.get_country!(args[:id])
+    changeset = %{name: args[:name], abbreviation: args[:abbreviation]}
+
+    case Locations.update_country(country, changeset) do
+      {:error, changeset} ->
+        {:error,
+         message: "Could not update country", details: ChangesetErrors.error_details(changeset)}
+
+      {:ok, country} ->
+        publish_country_change(country)
+        {:ok, country}
+    end
+  end
+
   defp publish_country_change(country) do
     Absinthe.Subscription.publish(
       RealtimeWeb.Endpoint,
