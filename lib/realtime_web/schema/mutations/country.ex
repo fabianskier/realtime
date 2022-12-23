@@ -11,5 +11,14 @@ defmodule RealtimeWeb.Schema.Mutations.Country do
 
       resolve(&Resolvers.Country.create_country/2)
     end
+
+    @desc "Update a country"
+    field :update_country, :country do
+      arg :id, non_null(:id)
+      arg :name, :string
+      arg :abbreviation, :string
+
+      resolve(&Resolvers.Country.update_country/2)
+    end
   end
 end
