@@ -7,12 +7,15 @@ defmodule RealtimeWeb.Resolvers.Country do
     Country.find(%{id: id})
   end
 
+  def all(_, _) do
+    Country.all()
+  end
+
   def create_country(args, _) do
     Country.create_country(args)
   end
 
   def update_country(args, _) do
-    IO.inspect(args)
     Country.update_country(args)
   end
 end

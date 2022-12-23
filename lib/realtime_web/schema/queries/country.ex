@@ -10,5 +10,11 @@ defmodule RealtimeWeb.Schema.Queries.Country do
 
       resolve(&Resolvers.Country.find/2)
     end
+
+    @desc "Get all countries"
+    field :countries, list_of(:country) do
+
+      resolve(&Resolvers.Country.all/2)
+    end
   end
 end

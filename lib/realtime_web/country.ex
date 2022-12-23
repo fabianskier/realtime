@@ -11,6 +11,15 @@ defmodule RealtimeWeb.Country do
     end
   end
 
+  def all() do
+    try do
+      {:ok, Locations.list_countries}
+    rescue
+      Ecto.NoResultsError ->
+        {:error, %{message: "countries not found", details: %{}}}
+    end
+  end
+
   def create_country(args) do
     case Locations.create_country(args) do
       {:error, changeset} ->
